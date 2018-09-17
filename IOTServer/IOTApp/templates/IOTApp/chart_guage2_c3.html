@@ -1,0 +1,64 @@
+{% extends "IOTApp/base_item.html" %}
+{% block content %}
+
+<link href="/static/c3.css" media="screen" rel="stylesheet" type="text/css" />
+<script src="/static/d3-5.4.0.min.js" charset="utf-8" type="text/javascript"></script>
+<script src="/static/c3.js" charset="utf-8" type="text/javascript"></script>
+
+<div id='chart'></div>
+<script>    
+    var data = {
+        data: {
+            columns: [],
+            type: 'gauge',
+            onclick: function (d, i) { console.log("onclick", d, i); },
+            onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+            onmouseout: function (d, i) { console.log("onmouseout", d, i); },
+        },
+        gauge: {
+             label: {
+                format: function(value, ratio) {
+                    return value;
+                },
+                show: true // to turn off the min/max labels.
+             },
+            min: 0,
+            max: 100,
+            width: 20,
+            units: " %"
+        },
+        color: {
+            pattern: ['#60B044', '#FF0000', '#F6C600', '#60B044'], 
+            threshold: {
+                values: [30, 60, 90, 100]
+            }
+        },
+        size: {
+            height: 150
+        }
+    }
+
+    "{% for column in columns %}"
+        if ("{{ forloop.counter }}"==2){
+            data.data.columns.push(["{{column}}"])
+        }
+    "{% endfor %}"    
+
+    "{% for sensord in sensordata %}"
+        rowdata = ""
+        rowdata = JSON.parse("{{sensord.Value}}".replace(/&quot;/g,'"'))
+
+        "{% for column in columns %}"
+            if ("{{ forloop.counter }}"==2){
+                data.data.columns[0].push(rowdata["{{column}}"])
+            }
+        "{% endfor %}"
+
+    "{% endfor %}"
+
+    var chart = c3.generate(
+        data
+    );
+
+</script>
+{% endblock %}

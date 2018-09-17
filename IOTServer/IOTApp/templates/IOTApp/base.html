@@ -1,0 +1,35 @@
+{% load staticfiles %}
+<html>
+    <head>
+
+            <link rel="stylesheet" href="/static/bootstrap.min.css" > 
+            <script src="/static/jquery-3.2.1.slim.min.js" ></script>
+            <script src="/static/bootstrap.min.js" ></script>
+            <script type="text/javascript" src="/static/loader.js"></script>
+
+            <nav class="navbar navbar-fixed-top navbar-inverse bg-dark">
+            <div class="container">
+                <div class="navbar-header">
+                <a class="navbar-brand" href="dashboard"><font size="5" color="yellow"><strong>IoT Dashboard</strong></font></a>
+                </div>          
+                <div id="navbar" class="collapse navbar-collapse">
+
+                        <ul class="nav navbar-nav text-white" >
+                            <li class="active text-white"><a href="admin" font color="white">Admin</a></li>
+                        </ul>
+
+                {% if user.is_authenticated %}
+                    <ul class="nav navbar-nav">
+                {% endif %}
+                </div><!-- /.nav-collapse -->
+            </div><!-- /.container -->
+        </nav><!-- /.navbar -->
+
+
+    </head>
+    <body>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>
+

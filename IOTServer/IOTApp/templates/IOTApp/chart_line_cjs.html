@@ -1,0 +1,40 @@
+{% extends "IOTApp/base_item.html" %}
+{% block content %}
+
+<link href="/static/c3.css" media="screen" rel="stylesheet" type="text/css" />
+<script src="/static/d3-5.4.0.min.js" charset="utf-8" type="text/javascript"></script>
+<script src="/static/c3.js" charset="utf-8" type="text/javascript"></script>
+
+<script>
+        var refrsshtime=10000
+        var timeout = setTimeout("location.reload(true);",refrsshtime); //refresh every 10sec
+        function resetTimeout() { clearTimeout(timeout); }
+</script>
+
+<div id='chart'></div>
+<script>
+
+    var data = {
+        columns:[
+            ['x']
+        ]
+    }
+    "{% for column in columns %}"
+        data.columns.push(["{{column}}"])
+    "{% endfor %}"    
+
+    "{% for sensord in sensordata %}"
+        rowdata = ""
+        rowdata = JSON.parse("{{sensord.Value}}".replace(/&quot;/g,'"'))
+
+        "{% for column in columns %}"
+            data.columns["{{ forloop.counter }}"].push(rowdata["{{column}}"])
+        "{% endfor %}"
+
+    "{% endfor %}"
+
+
+    var chart = c3.generate({ data });
+
+</script>
+{% endblock %}

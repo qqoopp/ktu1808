@@ -1,0 +1,67 @@
+{% extends "IOTApp/base.html" %}
+
+
+{% block content %}
+
+<style type="text/css">    
+    iframe {  
+        border:none; 
+        width:100%;    
+        height:300;
+    }
+</style>
+<script>
+    function onload(){
+        var w = window.innerWidth;
+        var h = window.innerHeight; 
+    }
+</script>
+
+<body class="nav-md bg-light" onload="onload()">
+
+<br/><br/><br/><br/>
+
+<div class="row">
+    <div class="col-md-2 col-sm-4 col-xs-12">
+        <div class="x_panel tile fixed_height_320">
+            <iframe id="chart" src="chart_org" scrolling="no"></iframe>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-4 col-xs-12">
+        <div class="x_panel tile fixed_height_320">
+            <iframe id="chart" src="chart_guage_c3/dht" scrolling="no"></iframe>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-4 col-xs-12">
+        <div class="x_panel tile fixed_height_320">
+            <iframe id="chart" src="chart_guage2_c3/dht" scrolling="no"></iframe>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-4 col-xs-12">
+        <div class="x_panel tile fixed_height_320">
+            <iframe id="chart" src="chart_guage/dht" scrolling="no"></iframe>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3 col-sm-4 col-xs-12">
+        <div class="x_panel tile fixed_height_320">
+            <iframe id="chart" src="chart_sankey/device" scrolling="no"></iframe>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-4 col-xs-12">
+        <div class="x_panel tile fixed_height_320">
+            <iframe id="chart" src="chart_line/dht" scrolling="no"></iframe>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-4 col-xs-12">
+        <div class="x_panel tile fixed_height_320">
+                <iframe id="chart" src="chart_line_c3/dht" scrolling="no"></iframe>
+        </div>
+    </div>
+</div>
+
+</body>
+{% endblock %}
+
